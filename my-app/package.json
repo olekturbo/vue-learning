@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "vue": "^2.6.6",
+    "vuedraggable": "^2.19.1",
     "vuetify": "^1.5.5"
   },
   "devDependencies": {
