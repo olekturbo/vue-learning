@@ -109,22 +109,22 @@ export default {
           ]
         },
         {
-          name: "abcd",
+          name: "Pytanie testowe",
           answers: [
             {
-              name: "qwe",
+              name: "test 1",
               correct: false,
               description: "Góry to moje ulubione miejsce na ziemii.",
               image: "mountain.jpg"
             },
             {
-              name: "rrr",
+              name: "test 2",
               correct: false,
               description: "Polskie morze jest najpiękniejsze.",
               image: "sea.jpg"
             },
             {
-              name: "aa",
+              name: "test 3",
               correct: true,
               description: "Udało ci się zgadnąć.",
               image: "forest.jpg"
