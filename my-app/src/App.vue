@@ -11,7 +11,7 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="step > 3" step="3">Name of step 3</v-stepper-step>
+          <v-stepper-step :complete="step > 3" step="3">Uzupełnij wyrażenie</v-stepper-step>
 
           <v-divider></v-divider>
 
@@ -38,7 +38,9 @@
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-5" color="grey lighten-1" height="200px"></v-card>
+            <v-card class="mb-5" color="white lighten-1" height="50vh">
+              <Fill></Fill>
+            </v-card>
 
             <v-btn color="primary" @click="step = 4">Kontynuuj</v-btn>
 
@@ -59,11 +61,13 @@
 <script>
 import Quiz from "@/components/Quiz";
 import Sort from "@/components/Sort";
+import Fill from "@/components/Fill";
 export default {
   name: "App",
   components: {
     Quiz,
-    Sort
+    Sort,
+    Fill
   },
   data() {
     return {
