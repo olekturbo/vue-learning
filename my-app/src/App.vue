@@ -3,19 +3,19 @@
     <v-app id="inspire">
       <v-stepper v-model="step">
         <v-stepper-header>
-          <v-stepper-step :complete="step > 1" step="1">Quiz</v-stepper-step>
+          <v-stepper-step @click="step = 1" :complete="step > 1" step="1">Quiz</v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="step > 2" step="2">Kolejność</v-stepper-step>
+          <v-stepper-step @click="step = 2" :complete="step > 2" step="2">Kolejność</v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="step > 3" step="3">Uzupełnij wyrażenie</v-stepper-step>
+          <v-stepper-step @click="step = 3" :complete="step > 3" step="3">Uzupełnij wyrażenie</v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="4">Name of step 4</v-stepper-step>
+          <v-stepper-step @click="step = 4" step="4">Name of step 4</v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -77,4 +77,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scope>
+.v-stepper__step {
+  cursor: pointer;
+}
+</style>
