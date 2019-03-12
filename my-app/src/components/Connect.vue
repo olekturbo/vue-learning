@@ -136,6 +136,7 @@ export default {
       this.sort(this.rightSentences);
       this.shuffle(this.leftSentences);
       this.shuffle(this.rightSentences);
+      this.content = "";
     },
     clear: function(array) {
       array.forEach(element => {
