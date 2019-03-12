@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="fill">
     <div class="mb-5">
       <h3 class="display-1">Połącz pasujące do siebie wyrażenia.</h3>
       <span
@@ -17,6 +17,7 @@
                     @click="handleLeftClick(sentence)"
                     :class="{'active': sentence.isActive, 'success': sentence.matched, 'primary': !sentence.matched}"
                     dark
+                    :id="'left'+sentence.id"
                   >
                     <v-card-text>{{ sentence.name }}</v-card-text>
                   </v-card>
@@ -34,6 +35,7 @@
                     @click="handleRightClick(sentence)"
                     :class="{'active': sentence.isActive, 'success': sentence.matched, 'primary': !sentence.matched}"
                     dark
+                    :id="'right'+sentence.id"
                   >
                     <v-card-text>{{ sentence.name }}</v-card-text>
                   </v-card>
@@ -47,6 +49,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <span v-html="content"></span>
   </div>
 </template>
 
@@ -54,6 +57,7 @@
 export default {
   data() {
     return {
+      content: "",
       leftSentences: [
         {
           id: 1,
@@ -180,11 +184,69 @@ export default {
           rightActiveSentence.matched = true;
           leftActiveSentence.isActive = false;
           rightActiveSentence.isActive = false;
+          this.draw(leftActiveSentence.id, rightActiveSentence.id);
         }
       }
     },
     getActiveSentences: function(sentences) {
       return sentences.filter(s => s.isActive == true);
+    },
+    draw: function(leftId, rightId) {
+      var div1 = document.getElementById("left" + leftId);
+      var div2 = document.getElementById("right" + rightId);
+      this.connect(div1, div2, "#4caf50", 5);
+    },
+    getOffset: function(el) {
+      var rect = el.getBoundingClientRect();
+      var template = document.getElementById('fill');
+      console.log(rect);
+      return {
+        left: rect.left + window.pageXOffset,
+        top: rect.top + window.pageYOffset,
+        width: rect.width || el.offsetWidth,
+        height: rect.height || el.offsetHeight
+      };
+    },
+    connect: function(div1, div2, color, thickness) {
+      var off1 = this.getOffset(div1);
+      var off2 = this.getOffset(div2);
+      // bottom right
+      var x1 = off1.left + off1.width;
+      var y1 = off1.top + off1.height;
+      // top right
+      var x2 = off2.left + off2.width;
+      var y2 = off2.top;
+      // distance
+      var length = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+      // center
+      var cx = (x1 + x2) / 2 - length / 2;
+      var cy = (y1 + y2) / 2 - thickness / 2;
+      // angle
+      var angle = Math.atan2(y1 - y2, x1 - x2) * (180 / Math.PI);
+      // make hr
+      var htmlLine =
+        "<div style='padding:0px; margin:0px; height:" +
+        thickness +
+        "px; background-color:" +
+        color +
+        "; line-height:1px; position:absolute; left:" +
+        cx +
+        "px; top:" +
+        cy +
+        "px; width:" +
+        length +
+        "px; -moz-transform:rotate(" +
+        angle +
+        "deg); -webkit-transform:rotate(" +
+        angle +
+        "deg); -o-transform:rotate(" +
+        angle +
+        "deg); -ms-transform:rotate(" +
+        angle +
+        "deg); transform:rotate(" +
+        angle +
+        "deg);'></div>";
+      this.content += htmlLine;
     }
   }
 };
