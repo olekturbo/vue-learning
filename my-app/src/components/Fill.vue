@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h3 class="display-1">Uzupełnij poprawnie wyrażenie.</h3>
+    <span
+      class="subheading"
+    >Aby przejść do nastepnego zagadnienia należy nacisnąć przycisk z numerem pytania po lewej stronie.</span>
     <v-layout align-center>
       <v-item-group v-model="window" class="shrink mr-4 mt-5" mandatory tag="v-flex">
         <v-item v-for="(sentence, index) in sentences" :key="sentence.firstPart">
@@ -37,7 +41,7 @@
         </v-window>
       </v-flex>
     </v-layout>
-    <v-btn class="mt-5 left" color="cyan darken-2" style="color: white;" @click="checkWin">Sprawdź</v-btn>
+    <v-btn class="mt-5 left" color="cyan darken-2" dark @click="checkWin">Sprawdź</v-btn>
 
     <v-snackbar
       v-model="snackbar.visibility"
@@ -100,7 +104,6 @@ export default {
   },
   methods: {
     solutionIsCompared: function(element) {
-      console.log(element);
       let isWin = true;
       let array = element.solutions.map(f => {
         return f.toUpperCase();
@@ -131,7 +134,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .v-input input {
   text-align: center;
 }

@@ -35,19 +35,19 @@
         <v-btn
           class="mt-3 left"
           color="cyan darken-2"
-          style="color: white;"
+          dark
           @click="checkWin"
         >Sprawdź</v-btn>
         <v-btn
           class="mt-3 right"
           color="cyan darken-3"
-          style="color: white;"
+          dark
           @click="reorderList"
         >Podpowiedź</v-btn>
         <v-btn
           class="mt-3 right"
           color="teal lighten-1"
-          style="color: white;"
+          dark
           @click="mixList"
         >Pomieszaj</v-btn>
       </v-flex>

@@ -15,42 +15,44 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step @click="step = 4" step="4">Name of step 4</v-stepper-step>
+          <v-stepper-step @click="step = 4" step="4">Łączenie sentencji</v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-card class="mb-5 text-center" color="white lighten-1" height="50vh">
+            <v-card class="mb-5 text-center" color="white lighten-1" height="60vh">
               <Quiz></Quiz>
             </v-card>
 
-            <v-btn color="primary" @click="step = 2">Kontynuuj</v-btn>
+            <v-btn class="right" color="primary" @click="step = 2">Kontynuuj</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-card class="mb-5" color="white lighten-1" height="50vh">
+            <v-card class="mb-5" color="white lighten-1" height="60vh">
               <Sort></Sort>
             </v-card>
 
-            <v-btn color="primary" @click="step = 3">Kontynuuj</v-btn>
+            <v-btn class="right" color="primary" @click="step = 3">Kontynuuj</v-btn>
 
-            <v-btn flat @click="step = 1">Cofnij</v-btn>
+            <v-btn class="left" flat @click="step = 1">Cofnij</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-5" color="white lighten-1" height="50vh">
+            <v-card class="mb-5" color="white lighten-1" height="60vh">
               <Fill></Fill>
             </v-card>
 
-            <v-btn color="primary" @click="step = 4">Kontynuuj</v-btn>
+            <v-btn class="right" color="primary" @click="step = 4">Kontynuuj</v-btn>
 
-            <v-btn @click="step = 2" flat>Cofnij</v-btn>
+            <v-btn class="left" @click="step = 2" flat>Cofnij</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="4">
-            <v-card class="mb-5" color="grey lighten-1" height="200px"></v-card>
+            <v-card class="mb-5" color="white lighten-1" height="60vh">
+              <Connect></Connect>
+            </v-card>
 
-            <v-btn flat @click="step = 3">Cofnij</v-btn>
+            <v-btn class="left" flat @click="step = 3">Cofnij</v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -62,12 +64,14 @@
 import Quiz from "@/components/Quiz";
 import Sort from "@/components/Sort";
 import Fill from "@/components/Fill";
+import Connect from "@/components/Connect";
 export default {
   name: "App",
   components: {
     Quiz,
     Sort,
-    Fill
+    Fill,
+    Connect
   },
   data() {
     return {
@@ -77,7 +81,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .v-stepper__step {
   cursor: pointer;
 }
