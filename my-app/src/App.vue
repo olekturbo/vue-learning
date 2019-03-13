@@ -20,7 +20,7 @@
 
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-card class="mb-5 text-center" color="white lighten-1" height="60vh">
+            <v-card class="mb-5 text-center" color="white lighten-1" min-height="60vh">
               <Quiz></Quiz>
             </v-card>
 
@@ -28,7 +28,7 @@
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-card class="mb-5" color="white lighten-1" height="60vh">
+            <v-card class="mb-5" color="white lighten-1" min-height="60vh">
               <Sort></Sort>
             </v-card>
 
@@ -38,7 +38,7 @@
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-5" color="white lighten-1" height="60vh">
+            <v-card class="mb-5" color="white lighten-1" min-height="60vh">
               <Fill></Fill>
             </v-card>
 
@@ -48,8 +48,8 @@
           </v-stepper-content>
 
           <v-stepper-content step="4">
-            <v-card class="mb-5" color="white lighten-1" height="60vh">
-              <Connect></Connect>
+            <v-card class="mb-5" color="white lighten-1" min-height="60vh">
+              <Connect @content="handleNewContent"></Connect>
             </v-card>
 
             <v-btn class="left" flat @click="step = 3">Cofnij</v-btn>
@@ -57,6 +57,7 @@
         </v-stepper-items>
       </v-stepper>
     </v-app>
+    <span v-html="content"></span>
   </div>
 </template>
 
@@ -75,8 +76,14 @@ export default {
   },
   data() {
     return {
-      step: 0
+      step: 0,
+      content: ""
     };
+  },
+  methods: {
+    handleNewContent: function(value) {
+      this.content = value;
+    }
   }
 };
 </script>

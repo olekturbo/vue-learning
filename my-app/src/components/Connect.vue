@@ -49,7 +49,6 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <span v-html="content"></span>
   </div>
 </template>
 
@@ -137,6 +136,7 @@ export default {
       this.shuffle(this.leftSentences);
       this.shuffle(this.rightSentences);
       this.content = "";
+      this.$emit('content', this.content);
     },
     clear: function(array) {
       array.forEach(element => {
@@ -210,20 +210,20 @@ export default {
     connect: function(div1, div2, color, thickness) {
       var off1 = this.getOffset(div1);
       var off2 = this.getOffset(div2);
-      // bottom right
-      var x1 = off1.left + off1.width - 50;
-      var y1 = off1.top + off1.height - 120;
-      // top right
-      var x2 = off2.left + off2.width - 50;
-      var y2 = off2.top - 50;
-      // distance
-      var length = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) - 50;
-      // center
+
+      var x1 = off1.left + off1.width;
+      var y1 = off1.top + off1.height - 25;
+      
+      var x2 = off2.left
+      var y2 = off2.top + 25;
+      
+      var length = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+      
       var cx = ((x1 + x2) / 2 - length / 2);
       var cy = (y1 + y2) / 2 - thickness / 2;
-      // angle
+      
       var angle = Math.atan2(y1 - y2, x1 - x2) * (180 / Math.PI);
-      // make hr
+      
       var htmlLine =
         "<div style='padding:0px; margin:0px; height:" +
         thickness +
@@ -246,7 +246,9 @@ export default {
         "deg); transform:rotate(" +
         angle +
         "deg);'></div>";
+        
       this.content += htmlLine;
+      this.$emit('content', this.content);
     }
   }
 };
