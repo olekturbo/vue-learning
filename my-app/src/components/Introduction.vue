@@ -1,0 +1,55 @@
+<template>
+  <div>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex xs4>
+          <v-card class="person" color="#DAE0E0">
+            <img src="../assets/img.png">
+          </v-card>
+        </v-flex>
+        <v-flex xs8>
+          <v-card class="welcome" color="#DAE0E0">
+            <v-card-text>
+              <div class="welcome-title">Witamy na naszym szkoleniu</div>
+              <div class="welcome-subtitle">Sprawdź krótki instruktaż</div>
+            </v-card-text>
+            <img src="../assets/logo.png">
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
+</template>
+
+<script>
+</script>
+
+<style scoped>
+.person img {
+  height: 80vh;
+  object-fit: contain;
+}
+.welcome {
+  text-align: left;
+  position: absolute;
+  top: 25%;
+}
+.welcome img {
+    height: 100%;
+    object-fit: contain;
+    margin-top: 10%;
+}
+.welcome-title,
+.welcome-subtitle {
+  font-weight: bold;
+}
+.welcome-title {
+  color: #ed7d31;
+  font-size: 60px;
+}
+.welcome-subtitle {
+  color: #4c4c65;
+  font-size: 40px;
+   margin-top: 10px;
+}
+</style>

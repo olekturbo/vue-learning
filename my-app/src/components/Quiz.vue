@@ -13,14 +13,9 @@
           <div class="front" :style="{backgroundImage: 'url(images/' + answer.image + ')'}">
             <h1 class="text-shadow">{{ answer.name }}</h1>
           </div>
-          <div 
-          class="back"
-          :class="{'success': answer.correct, 'error': !answer.correct}"
-          >
+          <div class="back" :class="{'success': answer.correct, 'error': !answer.correct}">
             <template>
-              <h2
-                v-if="answer.correct"
-              >Prawidłowa odpowiedź!</h2>
+              <h2 v-if="answer.correct">Prawidłowa odpowiedź!</h2>
               <h2 v-else>Nieprawidłowa odpowiedź!</h2>
             </template>
             <p>{{ answer.description }}</p>
@@ -28,34 +23,26 @@
         </div>
       </template>
     </template>
-    <v-progress-linear v-model="valueDeterminate"></v-progress-linear>
-    <v-btn
-      v-if="showAllAnswers"
-      color="primary"
-      class="left"
-      @click="previousQuestion"
-    >Poprzednie pytanie</v-btn>
-    <v-btn
-      v-if="showAllAnswers"
-      color="primary"
-      class="right"
-      @click="nextQuestion"
-    >Następne pytanie</v-btn>
-    <v-snackbar
-      v-model="snackbar.visibility"
-      :color="snackbar.color"
-      :bottom="snackbar.y === 'bottom'"
-      :left="snackbar.x === 'left'"
-      :multi-line="snackbar.mode === 'multi-line'"
-      :right="snackbar.x === 'right'"
-      :timeout="snackbar.timeout"
-      :top="snackbar.y === 'top'"
-      :vertical="snackbar.mode === 'vertical'"
-      :error="error"
-    >
-      {{ snackbar.text }}
-      <v-btn color="white" flat @click="snackbar.visibility = false">&times;</v-btn>
-    </v-snackbar>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex xs2 left offset-xs4>
+          <v-btn
+            v-if="showAllAnswers && this.questionsCounter > 0"
+            color="primary"
+            class="left"
+            @click="previousQuestion"
+          >Poprzednie pytanie</v-btn>
+        </v-flex>
+        <v-flex xs2 right>
+          <v-btn
+            v-if="showAllAnswers && this.questions.length - 1 > this.questionsCounter"
+            color="primary"
+            class="right"
+            @click="nextQuestion"
+          >Następne pytanie</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -80,7 +67,6 @@ export default {
         text: "",
         color: "error"
       },
-      valueDeterminate: 0,
       questionsCounter: 0
     };
   },
@@ -142,7 +128,6 @@ export default {
         this.isRotated = true;
         this.selected = answer;
         this.showAll();
-        this.handleDeterminate(this.questionsCounter + 1);
       }
     },
     showAll: function() {
@@ -152,37 +137,20 @@ export default {
       }, 1000);
     },
     nextQuestion: function() {
-      if (this.questionsCounter >= this.questions.length - 1) {
-        this.handleSnackbar("Brak możliwości przejścia do kolejnego pytania.");
-      } else {
-        var vm = this;
-        setTimeout(function() {
-          vm.showAllAnswers = false;
-          vm.questionsCounter++;
-          vm.isRotated = false;
-          vm.handleDeterminate(vm.questionsCounter);
-        });
-      }
+      this.questionsCounter++;
+      var vm = this;
+      setTimeout(function() {
+        vm.showAllAnswers = false;
+        vm.isRotated = false;
+      });
     },
     previousQuestion: function() {
-      if (this.questionsCounter < 1) {
-        this.handleSnackbar("Brak możliwości cofnięcia.");
-      } else {
-        var vm = this;
-        setTimeout(function() {
-          vm.showAllAnswers = false;
-          vm.questionsCounter--;
-          vm.isRotated = false;
-          vm.handleDeterminate(vm.questionsCounter);
-        });
-      }
-    },
-    handleSnackbar: function(text) {
-      this.snackbar.text = text;
-      this.snackbar.visibility = true;
-    },
-    handleDeterminate: function(value) {
-      this.valueDeterminate = (value / this.questions.length) * 100;
+      this.questionsCounter--;
+      var vm = this;
+      setTimeout(function() {
+        vm.showAllAnswers = false;
+        vm.isRotated = false;
+      });
     }
   }
 };
