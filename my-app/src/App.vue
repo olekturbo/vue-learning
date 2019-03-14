@@ -78,9 +78,7 @@
               <Quiz></Quiz>
             </v-card>
 
-            <v-btn class="right" color="primary" @click="step = 5">Kontynuuj</v-btn>
-
-            <v-btn class="left" flat @click="step = 3">Cofnij</v-btn>
+            <v-btn class="right" dark color="#4c4c65" @click="step = 5">Kontynuuj</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="5">

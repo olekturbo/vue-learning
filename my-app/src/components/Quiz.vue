@@ -1,49 +1,60 @@
 <template>
-  <div>
-    <template v-for="(question, index) in questions">
-      <template v-if="questionsCounter == index">
-        <v-subheader class="center" :key="question.name">{{ question.name }}</v-subheader>
-        <div
-          :key="answer.name"
-          v-for="answer in question.answers"
-          class="flip mt-3"
-          :class="[{clicked:answer.name == selected.name}, {'clicked': showAllAnswers}]"
-          @click="handleRotate(answer)"
-        >
-          <div class="front" :style="{backgroundImage: 'url(images/' + answer.image + ')'}">
-            <h1 class="text-shadow">{{ answer.name }}</h1>
-          </div>
-          <div class="back" :class="{'success': answer.correct, 'error': !answer.correct}">
-            <template>
-              <h2 v-if="answer.correct">Prawidłowa odpowiedź!</h2>
-              <h2 v-else>Nieprawidłowa odpowiedź!</h2>
+  <v-container grid-list-md text-xs-center>
+    <v-layout row wrap>
+      <v-flex xs4>
+        <v-card class="person" color="#DAE0E0">
+          <img src="../assets/img.png">
+        </v-card>
+      </v-flex>
+      <v-flex xs8>
+        <v-card class="welcome" color="#DAE0E0">
+          <template v-for="(question, index) in questions">
+            <template v-if="questionsCounter == index">
+             <div class="welcome-title" :key="question.name">{{question.name}}</div>
+              <div
+                :key="answer.name"
+                v-for="answer in question.answers"
+                class="flip mt-3"
+                :class="[{clicked:answer.name == selected.name}, {'clicked': showAllAnswers}]"
+                @click="handleRotate(answer)"
+              >
+                <div class="front">
+                  <h1 class="text-shadow">{{ answer.name }}</h1>
+                </div>
+                <div class="back" :class="{'green': answer.correct, 'error': !answer.correct}">
+                  <template>
+                    <h2 v-if="answer.correct">Prawidłowa odpowiedź!</h2>
+                    <h2 v-else>Nieprawidłowa odpowiedź!</h2>
+                  </template>
+                  <p>{{ answer.description }}</p>
+                </div>
+              </div>
             </template>
-            <p>{{ answer.description }}</p>
-          </div>
-        </div>
-      </template>
-    </template>
-    <v-container grid-list-md text-xs-center>
-      <v-layout row wrap>
-        <v-flex xs2 left offset-xs4>
-          <v-btn
-            v-if="showAllAnswers && this.questionsCounter > 0"
-            color="primary"
-            class="left"
-            @click="previousQuestion"
-          >Poprzednie pytanie</v-btn>
-        </v-flex>
-        <v-flex xs2 right>
-          <v-btn
-            v-if="showAllAnswers && this.questions.length - 1 > this.questionsCounter"
-            color="primary"
-            class="right"
-            @click="nextQuestion"
-          >Następne pytanie</v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+          </template>
+          <v-container grid-list-md text-xs-center>
+            <v-layout row wrap>
+              <v-flex xs2 left offset-xs4>
+                <v-btn
+                  v-if="showAllAnswers && this.questionsCounter > 0"
+                  color="primary"
+                  class="left"
+                  @click="previousQuestion"
+                >Poprzednie pytanie</v-btn>
+              </v-flex>
+              <v-flex xs2 right>
+                <v-btn
+                  v-if="showAllAnswers && this.questions.length - 1 > this.questionsCounter"
+                  color="primary"
+                  class="right"
+                  @click="nextQuestion"
+                >Następne pytanie</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 
@@ -249,12 +260,24 @@ h1 {
   transform: rotateX(0deg);
 }
 
+.front {
+  background: #4c4c65;
+}
+
+.front, .back {
+  text-align: center;
+}
+
+.front h1, .back h2 {
+  margin-top: 85px;
+}
+
+
 .flip {
   position: relative;
   display: inline-block;
-  margin-right: 20px;
   margin-bottom: 1em;
-  width: 400px;
+  width: 300px;
 }
 
 .flip > .front,
@@ -264,9 +287,9 @@ h1 {
   width: inherit;
   background-size: cover !important;
   background-position: center !important;
-  height: 220px;
+  height: 270px;
+  width: 270px;
   padding: 1em 2em;
-  border-radius: 10px;
 }
 
 .flip > .front p,
@@ -276,20 +299,25 @@ h1 {
   color: white;
 }
 
-.text-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.04), 2px 2px rgba(0, 0, 0, 0.04),
-    3px 3px rgba(0, 0, 0, 0.04), 4px 4px rgba(0, 0, 0, 0.04),
-    0.125rem 0.125rem rgba(0, 0, 0, 0.04), 6px 6px rgba(0, 0, 0, 0.04),
-    7px 7px rgba(0, 0, 0, 0.04), 8px 8px rgba(0, 0, 0, 0.04),
-    9px 9px rgba(0, 0, 0, 0.04), 0.3125rem 0.3125rem rgba(0, 0, 0, 0.04),
-    11px 11px rgba(0, 0, 0, 0.04), 12px 12px rgba(0, 0, 0, 0.04),
-    13px 13px rgba(0, 0, 0, 0.04), 14px 14px rgba(0, 0, 0, 0.04),
-    0.625rem 0.625rem rgba(0, 0, 0, 0.04), 16px 16px rgba(0, 0, 0, 0.04),
-    17px 17px rgba(0, 0, 0, 0.04), 18px 18px rgba(0, 0, 0, 0.04),
-    19px 19px rgba(0, 0, 0, 0.04), 1.25rem 1.25rem rgba(0, 0, 0, 0.04);
-}
-
 .list-group-item {
   cursor: grab;
+}
+
+.person img {
+  height: 80vh;
+  object-fit: contain;
+}
+
+.welcome {
+  text-align: left;
+  position: absolute;
+  top: 10%;
+}
+.welcome-title {
+  font-weight: bold;
+}
+.welcome-title {
+  color: #ed7d31;
+  font-size: 60px;
 }
 </style>
