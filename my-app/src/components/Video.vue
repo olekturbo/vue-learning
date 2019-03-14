@@ -10,7 +10,7 @@
         <v-flex xs8>
           <v-card class="welcome" color="#DAE0E0">
             <video preload controls>
-              <source src="">
+              <source src="../assets/video.mp4">
             </video>
           </v-card>
         </v-flex>

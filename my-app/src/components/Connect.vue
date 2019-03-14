@@ -128,7 +128,7 @@ export default {
     this.shuffle(this.rightSentences);
   },
   methods: {
-    replay: function(array) {
+    replay: function() {
       this.clear(this.leftSentences);
       this.clear(this.rightSentences);
       this.sort(this.leftSentences);
@@ -199,7 +199,7 @@ export default {
     },
     getOffset: function(el) {
       var rect = el.getBoundingClientRect();
-      var template = document.getElementById('fill');
+
       return {
         left: rect.left + window.pageXOffset,
         top: rect.top + window.pageYOffset,
