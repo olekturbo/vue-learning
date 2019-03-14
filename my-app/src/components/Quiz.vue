@@ -33,18 +33,20 @@
           </template>
           <v-container grid-list-md text-xs-center>
             <v-layout row wrap>
-              <v-flex xs2 left offset-xs4>
+              <v-flex xs4 left offset-xs1>
                 <v-btn
                   v-if="showAllAnswers && this.questionsCounter > 0"
-                  color="primary"
+                  color="#4c4c65"
                   class="left"
+                  dark
                   @click="previousQuestion"
                 >Poprzednie pytanie</v-btn>
               </v-flex>
-              <v-flex xs2 right>
+              <v-flex xs4 right>
                 <v-btn
                   v-if="showAllAnswers && this.questions.length - 1 > this.questionsCounter"
-                  color="primary"
+                  color="#4c4c65"
+                  dark
                   class="right"
                   @click="nextQuestion"
                 >Następne pytanie</v-btn>
@@ -101,6 +103,29 @@ export default {
             },
             {
               name: "las",
+              correct: true,
+              description: "Udało ci się zgadnąć.",
+              image: "forest.jpg"
+            }
+          ]
+        },
+         {
+          name: "test 2",
+          answers: [
+            {
+              name: "test 9",
+              correct: false,
+              description: "Góry to moje ulubione miejsce na ziemii.",
+              image: "mountain.jpg"
+            },
+            {
+              name: "test 8",
+              correct: false,
+              description: "Polskie morze jest najpiękniejsze.",
+              image: "sea.jpg"
+            },
+            {
+              name: "test 7",
               correct: true,
               description: "Udało ci się zgadnąć.",
               image: "forest.jpg"
