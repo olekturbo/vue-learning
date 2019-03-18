@@ -11,7 +11,8 @@
             <v-card-text>
               {{ list[currentSentence].name }}
               <br>
-              <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam velit magna, pellentesque vel libero at, efficitur rhoncus urna. Donec vestibulum ante ipsum, eu varius ipsum aliquam eu. Ut facilisis orci sed vestibulum facilisis. Donec sed malesuada diam. Proin pharetra tincidunt lectus, et efficitur ligula sollicitudin ac.
+              <br>
+              {{ list[currentSentence].body }}
             </v-card-text>
           </v-card>
         </transition>

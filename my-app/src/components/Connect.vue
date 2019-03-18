@@ -10,7 +10,7 @@
         <v-flex d-flex xs8>
           <v-layout row wrap>
             <v-flex d-flex xs12>
-              <div class="welcome-title">Połącz zwierzęta z ich gatunkami</div>
+              <div class="welcome-title mb-4">Połącz zwierzęta z ich gatunkami</div>
             </v-flex>
             <v-flex d-flex xs6>
               <v-layout align-start row wrap class="connect">
@@ -270,9 +270,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 80vh;
-}
 .connect {
   height: 500px;
 }

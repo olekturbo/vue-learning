@@ -27,8 +27,8 @@
               <span class="number">4</span>
               <div class="text">
                 <p>
-                  Przeczytaj cały dokument
-                  <a href="../download/instrukcje.pdf">
+                  Przeczytaj cały dokument <br/>
+                  <a href="../download/instrukcje.pdf" target="_blank">
                     <v-icon>picture_as_pdf</v-icon>(pobierz)
                   </a>
                 </p>
