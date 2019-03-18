@@ -26,8 +26,11 @@
             <div class="sentence">
               <span class="number">4</span>
               <div class="text">
-                <p>Przeczytaj cały dokument
-                  <v-icon>picture_as_pdf</v-icon>(pobierz)
+                <p>
+                  Przeczytaj cały dokument
+                  <a href="../download/instrukcje.pdf">
+                    <v-icon>picture_as_pdf</v-icon>(pobierz)
+                  </a>
                 </p>
               </div>
             </div>
@@ -47,6 +50,10 @@
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+}
 .head {
   color: #4c4c65;
   font-family: inherit !important;
@@ -55,7 +62,7 @@
   display: flex;
 }
 .mt-10 {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 .text {
   margin-top: 20px;

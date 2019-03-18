@@ -17,7 +17,7 @@
                   <v-flex class="d-inline-block">
                     <v-text-field
                       :append-icon="solutionIsCompared(sentence) ? 'check' : 'edit'"
-                      :color="solutionIsCompared(sentence) ? 'success' : 'primary'"
+                      :color="solutionIsCompared(sentence) ? 'success' : 'error'"
                       single-line
                       v-model="sentence.answer"
                     ></v-text-field>

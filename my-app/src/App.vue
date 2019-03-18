@@ -176,6 +176,7 @@ export default {
 <style>
 .person img {
   width: 100%;
+  height: 60vh;
 }
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,500,600,700&subset=latin-ext");
 /* APP */

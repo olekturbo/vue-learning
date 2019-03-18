@@ -8,51 +8,27 @@
       </v-flex>
       <v-flex xs8>
         <v-card class="welcome" color="#DAE0E0">
-          <template v-for="(question, index) in questions">
-            <template v-if="questionsCounter == index">
-             <div class="welcome-title" :key="question.name">{{question.name}}</div>
-              <div
-                :key="answer.name"
-                v-for="answer in question.answers"
-                class="flip mt-3"
-                :class="[{clicked:answer.name == selected.name}, {'clicked': showAllAnswers}]"
-                @click="handleRotate(answer)"
-              >
-                <div class="front">
-                  <h1 class="text-shadow">{{ answer.name }}</h1>
-                </div>
-                <div class="back" :class="{'green': answer.correct, 'error': !answer.correct}">
-                  <template>
-                    <h2 v-if="answer.correct">Prawidłowa odpowiedź!</h2>
-                    <h2 v-else>Nieprawidłowa odpowiedź!</h2>
-                  </template>
-                  <p>{{ answer.description }}</p>
-                </div>
+          <template>
+            <div class="welcome-title" :key="question.name">{{question.name}}</div>
+            <div
+              :key="answer.name"
+              v-for="answer in question.answers"
+              class="flip mt-3"
+              :class="[{clicked:answer.name == selected.name}, {'clicked': showAllAnswers}]"
+              @click="handleRotate(answer)"
+            >
+              <div class="front">
+                <h1 class="text-shadow">{{ answer.name }}</h1>
               </div>
-            </template>
+              <div class="back" :class="{'green': answer.correct, 'error': !answer.correct}">
+                <template>
+                  <h2 v-if="answer.correct">Prawidłowa odpowiedź!</h2>
+                  <h2 v-else>Nieprawidłowa odpowiedź!</h2>
+                </template>
+                <p>{{ answer.description }}</p>
+              </div>
+            </div>
           </template>
-          <v-container grid-list-md text-xs-center>
-            <v-layout row wrap>
-              <v-flex xs4 left offset-xs1>
-                <v-btn
-                  v-if="showAllAnswers && this.questionsCounter > 0"
-                  color="#4c4c65"
-                  class="left"
-                  dark
-                  @click="previousQuestion"
-                >Poprzednie pytanie</v-btn>
-              </v-flex>
-              <v-flex xs4 right>
-                <v-btn
-                  v-if="showAllAnswers && this.questions.length - 1 > this.questionsCounter"
-                  color="#4c4c65"
-                  dark
-                  class="right"
-                  @click="nextQuestion"
-                >Następne pytanie</v-btn>
-              </v-flex>
-            </v-layout>
-          </v-container>
         </v-card>
       </v-flex>
     </v-layout>
@@ -79,83 +55,31 @@ export default {
         timeout: 3000,
         text: "",
         color: "error"
-      },
-      questionsCounter: 0
+      }
     };
   },
   computed: {
-    questions: function() {
-      return [
-        {
-          name: "W jakie miejsce najchętniej byś się udał?",
-          answers: [
-            {
-              name: "góry",
-              correct: false,
-              description: "Góry to moje ulubione miejsce na ziemii.",
-              image: "mountain.jpg"
-            },
-            {
-              name: "morze",
-              correct: false,
-              description: "Polskie morze jest najpiękniejsze.",
-              image: "sea.jpg"
-            },
-            {
-              name: "las",
-              correct: true,
-              description: "Udało ci się zgadnąć.",
-              image: "forest.jpg"
-            }
-          ]
-        },
-         {
-          name: "test 2",
-          answers: [
-            {
-              name: "test 9",
-              correct: false,
-              description: "Góry to moje ulubione miejsce na ziemii.",
-              image: "mountain.jpg"
-            },
-            {
-              name: "test 8",
-              correct: false,
-              description: "Polskie morze jest najpiękniejsze.",
-              image: "sea.jpg"
-            },
-            {
-              name: "test 7",
-              correct: true,
-              description: "Udało ci się zgadnąć.",
-              image: "forest.jpg"
-            }
-          ]
-        },
-        {
-          name: "Pytanie testowe",
-          answers: [
-            {
-              name: "test 1",
-              correct: false,
-              description: "Góry to moje ulubione miejsce na ziemii.",
-              image: "mountain.jpg"
-            },
-            {
-              name: "test 2",
-              correct: false,
-              description: "Polskie morze jest najpiękniejsze.",
-              image: "sea.jpg"
-            },
-            {
-              name: "test 3",
-              correct: true,
-              description: "Udało ci się zgadnąć.",
-              image: "forest.jpg"
-            }
-          ]
-        }
-      ];
+    question: function() {
+      return {
+        name: "W jakie miejsce najchętniej byś się udał?",
+        answers: [
+          {
+            name: "góry",
+            correct: false,
+            description: "Góry to moje ulubione miejsce na ziemii."
+          },
+          {
+            name: "morze",
+            correct: false,
+            description: "Polskie morze jest najpiękniejsze."
+          },
+          {
+            name: "las",
+            correct: true,
+            description: "Udało ci się zgadnąć."
+          }
+        ]
+      };
     }
   },
   methods: {
@@ -171,22 +95,6 @@ export default {
       setTimeout(function() {
         vm.showAllAnswers = true;
       }, 1000);
-    },
-    nextQuestion: function() {
-      this.questionsCounter++;
-      var vm = this;
-      setTimeout(function() {
-        vm.showAllAnswers = false;
-        vm.isRotated = false;
-      });
-    },
-    previousQuestion: function() {
-      this.questionsCounter--;
-      var vm = this;
-      setTimeout(function() {
-        vm.showAllAnswers = false;
-        vm.isRotated = false;
-      });
     }
   }
 };
@@ -289,14 +197,15 @@ h1 {
   background: #4c4c65;
 }
 
-.front, .back {
+.front,
+.back {
   text-align: center;
 }
 
-.front h1, .back h2 {
+.front h1,
+.back h2 {
   margin-top: 85px;
 }
-
 
 .flip {
   position: relative;
