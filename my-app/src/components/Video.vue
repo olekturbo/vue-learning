@@ -9,7 +9,7 @@
         </v-flex>
         <v-flex xs8>
           <v-card class="welcome" color="#DAE0E0">
-            <video preload controls>
+            <video v-if="currentStep === 2" preload controls autoplay>
               <source src="../assets/szkolenie.mp4">
             </video>
           </v-card>
@@ -20,7 +20,11 @@
 </template>
 
 <script>
+export default {
+  props: ['currentStep']
+}
 </script>
+
 
 <style scoped>
 .welcome {

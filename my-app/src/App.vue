@@ -51,7 +51,7 @@
 
           <v-stepper-content step="2">
             <v-card class="mb-5 text-center" color="#DAE0E0">
-              <Video></Video>
+              <Video :current-step="step"></Video>
             </v-card>
 
             <v-btn class="next-btn" dark color="#4c4c65" @click="step = 3">Zobacz zagrożenia
