@@ -10,10 +10,9 @@
         <v-flex xs8>
           <v-card class="welcome" color="#DAE0E0">
             <v-card-text>
-              <div class="welcome-title">Witamy na naszym szkoleniu</div>
-              <div class="welcome-subtitle">Sprawdź krótki instruktaż</div>
+              <div class="welcome-title">Gratulacje!</div>
+              <div class="welcome-subtitle">Właśnie ukończyłeś kurs BHP!</div>
             </v-card-text>
-            <img src="../assets/logo.png">
           </v-card>
         </v-flex>
       </v-layout>

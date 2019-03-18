@@ -1,57 +1,47 @@
 <template>
-  <v-app id="inspire">
-    <v-layout row>
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-          <v-toolbar color="primary" dark>
-            <v-toolbar-title>Ustaw w poprawnej kolejności</v-toolbar-title>
-
-            <v-spacer></v-spacer>
-          </v-toolbar>
-
-          <v-list two-line>
-            <draggable
-              :list="list"
-              :disabled="!enabled"
-              :sortable="true"
-              class="list-group"
-              :autoscroll="true"
-            >
-              <div class="list-group-item" v-for="item in list" :key="item.id">
-                <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-
-                <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-
-                <v-list-tile v-else :key="item.title">
-                  <v-list-tile-content>
-                    <v-list-tile-title v-html="item.name"></v-list-tile-title>
-                    <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </div>
-            </draggable>
-          </v-list>
-        </v-card>
-        <v-btn
-          class="mt-3 left"
-          color="cyan darken-2"
-          dark
-          @click="checkWin"
-        >Sprawdź</v-btn>
-        <v-btn
-          class="mt-3 right"
-          color="cyan darken-3"
-          dark
-          @click="reorderList"
-        >Podpowiedź</v-btn>
-        <v-btn
-          class="mt-3 right"
-          color="teal lighten-1"
-          dark
-          @click="mixList"
-        >Pomieszaj</v-btn>
-      </v-flex>
-    </v-layout>
+  <div>
+    <v-container grid-list-md text-xs-center>
+      <v-layout align-center justify-center row fill-height>
+        <v-flex xs4>
+          <v-card class="person" color="#DAE0E0">
+            <img src="../assets/img.png">
+          </v-card>
+        </v-flex>
+        <v-flex xs8>
+          <v-card class="welcome" color="#DAE0E0">
+            <v-card-text>
+              <div class="welcome-title">Poukładaj swój dzień pracy</div>
+            </v-card-text>
+            <v-layout align-start row wrap justify-start>
+              <v-flex d-flex xs8>
+                <draggable
+                  :list="list"
+                  :disabled="!enabled"
+                  :sortable="true"
+                  class="list-group"
+                  :autoscroll="true"
+                >
+                  <v-flex v-for="item in list" :key="item.id" d-flex xs10 offset-xs1>
+                    <v-card
+                      @click="handleLeftClick(item)"
+                      dark
+                      :id="'left'+item.id"
+                      color="#4c4c65"
+                    >
+                      <v-card-text>{{ item.name }}</v-card-text>
+                    </v-card>
+                  </v-flex>
+                </draggable>
+                <v-flex d-flex xs2>
+                  <v-icon>compare_arrows</v-icon>
+                </v-flex>
+              </v-flex>
+            </v-layout>
+            <v-btn style="margin-left: 35px;" class="mt-3 left" color="#ed7d31" dark @click="checkWin">Sprawdź</v-btn>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-snackbar
       v-model="snackbar.visibility"
       :color="snackbar.color"
@@ -66,8 +56,9 @@
       {{ snackbar.text }}
       <v-btn color="white" flat @click="snackbar.visibility = false">&times;</v-btn>
     </v-snackbar>
-  </v-app>
+  </div>
 </template>
+
 
 
 <script>
@@ -81,37 +72,37 @@ export default {
       enabled: true,
       list: [
         {
-          name: "Zagadnienie numer 1",
+          name: "Przyjdź do pracy",
           id: 0,
           successOrder: 0,
           order: undefined
         },
         {
-          name: "Zagadnienie numer 2",
+          name: "Pracuj rano",
           id: 1,
           successOrder: 1,
           order: undefined
         },
         {
-          name: "Zagadnienie numer 3",
+          name: "Pracuj przed południem",
           id: 2,
           successOrder: 2,
           order: undefined
         },
         {
-          name: "Zagadnienie numer 4",
+          name: "Pracuj w południe",
           id: 3,
           successOrder: 3,
           order: undefined
         },
         {
-          name: "Zagadnienie numer 5",
+          name: "Pracuj po południu",
           id: 4,
           successOrder: 4,
           order: undefined
         },
         {
-          name: "Zagadnienie numer 6",
+          name: "Wyjdź z pracy",
           id: 5,
           successOrder: 5,
           order: undefined
@@ -180,4 +171,20 @@ export default {
   }
 };
 </script>
+
+<style>
+.v-card__text {
+  text-align: center;
+  cursor: grab;
+}
+</style>
+
+<style scoped>
+.v-icon {
+  transform: rotate(90deg);
+  font-size: 100px;
+  color: #ed7d31;
+}
+</style>
+
 

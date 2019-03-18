@@ -1,51 +1,66 @@
 <template>
   <div id="fill">
-    <div class="mb-5">
-      <h3 class="display-1">Połącz pasujące do siebie wyrażenia.</h3>
-      <span
-        class="subheading"
-      >Należy zaznaczyć jedną sentencję z lewej grupy wyrażeń oraz jedną sentencję z prawej grupy wyrażeń.</span>
-    </div>
     <v-container fluid grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-flex d-flex xs6>
+        <v-flex d-flex xs2 offset-xs1>
+          <v-card class="person" color="#DAE0E0">
+            <img src="../assets/img.png">
+          </v-card>
+        </v-flex>
+        <v-flex d-flex xs8>
           <v-layout row wrap>
-            <v-flex d-flex>
-              <v-layout row wrap>
-                <v-flex v-for="sentence in leftSentences" :key="sentence.id" d-flex xs4 offset-xs4>
-                  <v-card
-                    @click="handleLeftClick(sentence)"
-                    :class="{'active': sentence.isActive, 'success': sentence.matched, 'primary': !sentence.matched}"
-                    dark
-                    :id="'left'+sentence.id"
-                  >
-                    <v-card-text>{{ sentence.name }}</v-card-text>
-                  </v-card>
+            <v-flex d-flex xs12>
+              <div class="welcome-title">Połącz zwierzęta z ich gatunkami</div>
+            </v-flex>
+            <v-flex d-flex xs6>
+              <v-layout align-start row wrap class="connect">
+                <v-flex d-flex>
+                  <v-layout row wrap>
+                    <v-flex
+                      v-for="sentence in leftSentences"
+                      :key="sentence.id"
+                      d-flex
+                      xs4
+                      offset-xs4
+                    >
+                      <v-card
+                        @click="handleLeftClick(sentence)"
+                        :class="{'active': sentence.isActive, 'success': sentence.matched, 'not-success': !sentence.matched}"
+                        dark
+                        :id="'left'+sentence.id"
+                      >
+                        <v-card-text>{{ sentence.name }}</v-card-text>
+                      </v-card>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex d-flex xs6>
+              <v-layout align-start row wrap class="connect">
+                <v-flex d-flex>
+                  <v-layout row wrap>
+                    <v-flex
+                      v-for="sentence in rightSentences"
+                      :key="sentence.id"
+                      d-flex
+                      xs4
+                      offset-xs4
+                    >
+                      <v-card
+                        @click="handleRightClick(sentence)"
+                        :class="{'active': sentence.isActive, 'success': sentence.matched, 'not-success': !sentence.matched}"
+                        dark
+                        :id="'right'+sentence.id"
+                      >
+                        <v-card-text>{{ sentence.name }}</v-card-text>
+                      </v-card>
+                    </v-flex>
+                  </v-layout>
                 </v-flex>
               </v-layout>
             </v-flex>
           </v-layout>
-        </v-flex>
-        <v-flex d-flex xs6>
-          <v-layout row wrap>
-            <v-flex d-flex>
-              <v-layout row wrap>
-                <v-flex v-for="sentence in rightSentences" :key="sentence.id" d-flex xs4 offset-xs4>
-                  <v-card
-                    @click="handleRightClick(sentence)"
-                    :class="{'active': sentence.isActive, 'success': sentence.matched, 'primary': !sentence.matched}"
-                    dark
-                    :id="'right'+sentence.id"
-                  >
-                    <v-card-text>{{ sentence.name }}</v-card-text>
-                  </v-card>
-                </v-flex>
-              </v-layout>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex d-flex xs2 offset-xs5>
-          <v-btn @click="replay" color="cyan darken-2" dark class="left mt-5">Zacznij od nowa</v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -136,7 +151,7 @@ export default {
       this.shuffle(this.leftSentences);
       this.shuffle(this.rightSentences);
       this.content = "";
-      this.$emit('content', this.content);
+      this.$emit("content", this.content);
     },
     clear: function(array) {
       array.forEach(element => {
@@ -213,17 +228,17 @@ export default {
 
       var x1 = off1.left + off1.width;
       var y1 = off1.top + off1.height - 25;
-      
-      var x2 = off2.left
+
+      var x2 = off2.left;
       var y2 = off2.top + 25;
-      
+
       var length = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-      
-      var cx = ((x1 + x2) / 2 - length / 2);
+
+      var cx = (x1 + x2) / 2 - length / 2;
       var cy = (y1 + y2) / 2 - thickness / 2;
-      
+
       var angle = Math.atan2(y1 - y2, x1 - x2) * (180 / Math.PI);
-      
+
       var htmlLine =
         "<div style='padding:0px; margin:0px; height:" +
         thickness +
@@ -246,15 +261,27 @@ export default {
         "deg); transform:rotate(" +
         angle +
         "deg);'></div>";
-        
+
       this.content += htmlLine;
-      this.$emit('content', this.content);
+      this.$emit("content", this.content);
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.container {
+  height: 80vh;
+}
+.connect {
+  height: 500px;
+}
+.v-card {
+  height: 60px;
+}
+.not-success {
+  background: #4c4c65;
+}
 .v-card__text {
   cursor: pointer;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -263,5 +290,13 @@ export default {
 
 .v-card.active {
   filter: brightness(70%);
+}
+
+.person {
+  height: 100%;
+  object-fit: contain;
+}
+.welcome-title {
+  z-index: 100;
 }
 </style>

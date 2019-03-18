@@ -313,7 +313,7 @@ h1 {
   background-size: cover !important;
   background-position: center !important;
   height: 270px;
-  width: 270px;
+  width: 90%;
   padding: 1em 2em;
 }
 

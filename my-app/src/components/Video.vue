@@ -23,27 +23,19 @@
 </script>
 
 <style scoped>
-.person img {
-  height: 80vh;
-  object-fit: contain;
-}
 .welcome {
   border: 1px solid black;
   padding-left: 5%;
-  margin-top: 10%;
+  width: 100%;
+  height: auto;
+  position: relative;
+  border: 30px solid black;
 }
 .welcome video {
-    position: absolute;
-    display: block;
-    height: 440px;
-    width: 740px;
-    margin: 30px 0 0 30px;
-}
-.welcome::after {
-  height: 500px;
-  display: block;
-  width: 800px;
-  border: 30px solid #4c4c65;
-  content: "";
+  width: 80vh;
+  height: auto;
+  position: absolute;
+  background: #4c4c65;
+  padding: 30px;
 }
 </style>

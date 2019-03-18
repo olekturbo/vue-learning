@@ -1,28 +1,17 @@
 <template>
   <div>
-    <h3 class="display-1">Uzupełnij poprawnie wyrażenie.</h3>
-    <span
-      class="subheading"
-    >Aby przejść do nastepnego zagadnienia należy nacisnąć przycisk z numerem pytania po lewej stronie.</span>
-    <v-layout align-center>
-      <v-item-group v-model="window" class="shrink mr-4 mt-5" mandatory tag="v-flex">
-        <v-item v-for="(sentence, index) in sentences" :key="sentence.firstPart">
-          <div slot-scope="{ active, toggle }">
-            <v-btn color="primary" :input-value="active" icon @click="toggle">{{ index + 1}}</v-btn>
-          </div>
-        </v-item>
-      </v-item-group>
-
-      <v-flex>
-        <v-window v-model="window" class="elevation-1 mt-5" vertical>
-          <v-window-item v-for="(sentence, index) in sentences" :key="sentence.secondPart">
-            <v-card flat>
-              <v-card-text>
-                <v-layout align-center mb-3>
-                  <strong class="title">Wyrażenie nr
-                    <v-avatar color="primary" style="color: white;">{{ index + 1 }}</v-avatar>
-                  </strong>
-                </v-layout>
+    <v-container grid-list-md text-xs-center>
+      <v-layout align-center justify-center row fill-height>
+        <v-flex xs4>
+          <v-card class="person" color="#DAE0E0">
+            <img src="../assets/img.png">
+          </v-card>
+        </v-flex>
+        <v-flex xs8>
+          <div class="welcome">
+            <div class="welcome-title">Witamy na naszym szkoleniu</div>
+            <div class="mt-5">
+              <div v-for="sentence in sentences" :key="sentence.secondPart">
                 <p>
                   {{ sentence.firstPart }}
                   <v-flex class="d-inline-block">
@@ -35,28 +24,12 @@
                   </v-flex>
                   {{ sentence.secondPart }}
                 </p>
-              </v-card-text>
-            </v-card>
-          </v-window-item>
-        </v-window>
-      </v-flex>
-    </v-layout>
-    <v-btn class="mt-5 left" color="cyan darken-2" dark @click="checkWin">Sprawdź</v-btn>
-
-    <v-snackbar
-      v-model="snackbar.visibility"
-      :color="snackbar.color"
-      :bottom="snackbar.y === 'bottom'"
-      :left="snackbar.x === 'left'"
-      :multi-line="snackbar.mode === 'multi-line'"
-      :right="snackbar.x === 'right'"
-      :timeout="snackbar.timeout"
-      :top="snackbar.y === 'top'"
-      :vertical="snackbar.mode === 'vertical'"
-    >
-      {{ snackbar.text }}
-      <v-btn color="white" flat @click="snackbar.visibility = false">&times;</v-btn>
-    </v-snackbar>
+              </div>
+            </div>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -67,38 +40,26 @@ export default {
     return {
       sentences: [
         {
-          firstPart: "Największy ssak na całym świecie to",
-          secondPart: ".",
+          firstPart: "Jeden, dwa, trzy, ",
+          secondPart: "pięć.",
           answer: "",
           solutions: [
-            "płetwal błękitny",
-            "pletwal blekitny",
-            "płetwal blekitny",
-            "pletwal błękitny"
+            "cztery"
           ]
         },
         {
-          firstPart: "",
+          firstPart: "Według teorii Darwina",
           secondPart: "pochodzi od małpy.",
           answer: "",
           solutions: ["człowiek", "czlowiek"]
         },
         {
-          firstPart: "Lorem ipsum lorem ipsum lorem ipsum",
-          secondPart: "lorem ipsum lorem ipsum.",
+          firstPart: "Narzędzie służące do wbijania gwoździ to",
+          secondPart: "",
           answer: "",
-          solutions: ["test"]
+          solutions: ["mlotek", "młotek"]
         }
       ],
-      snackbar: {
-        visibility: false,
-        y: "top",
-        x: "right",
-        mode: "",
-        timeout: 3000,
-        text: "",
-        color: "success"
-      },
       window: 0
     };
   },
@@ -120,22 +81,39 @@ export default {
         });
         if (!array.includes(element.answer.toUpperCase())) isWin = false;
       });
-
-      this.snackbar.visibility = true;
-      if (isWin) {
-        this.snackbar.color = "success";
-        this.snackbar.text = "Wszystkie zdania zostały poprawnie uzupełnione!";
-      } else {
-        this.snackbar.color = "error";
-        this.snackbar.text = "Zdania zostały błędnie uzupełnione!";
-      }
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .v-input input {
   text-align: center;
+}
+.welcome p {
+  color: #4c4c65;
+  font-size: 20px;
+}
+.welcome {
+  text-align: left;
+  margin-top: 60px;
+}
+.welcome img {
+  height: 100%;
+  object-fit: contain;
+  margin-top: 10%;
+}
+.welcome-title,
+.welcome-subtitle {
+  font-weight: bold;
+}
+.welcome-title {
+  color: #ed7d31;
+  font-size: 60px;
+}
+.welcome-subtitle {
+  color: #4c4c65;
+  font-size: 40px;
+  margin-top: 10px;
 }
 </style>

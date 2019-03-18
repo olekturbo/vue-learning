@@ -44,7 +44,7 @@
               <Introduction></Introduction>
             </v-card>
 
-            <v-btn class="right" dark color="#4c4c65" @click="step = 2">Sprawdź krótki instruktaż
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 2">Sprawdź krótki instruktaż
               <v-icon right dark>arrow_right_alt</v-icon>
             </v-btn>
           </v-stepper-content>
@@ -54,7 +54,7 @@
               <Video></Video>
             </v-card>
 
-            <v-btn class="right" dark color="#4c4c65" @click="step = 3">Zobacz zagrożenia
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 3">Zobacz zagrożenia
               <v-icon right dark>arrow_right_alt</v-icon>
             </v-btn>
           </v-stepper-content>
@@ -64,11 +64,11 @@
               <Gallery></Gallery>
             </v-card>
 
-            <video class="myframe" preload autoplay>
+            <video v-if="step === 3" class="myframe" preload autoplay>
               <source src="./assets/video.mp4">
             </video>
 
-            <v-btn class="right" dark color="#4c4c65" @click="step = 4">Pokaż co już wiesz
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 4">Pokaż co już wiesz
               <v-icon right dark>arrow_right_alt</v-icon>
             </v-btn>
           </v-stepper-content>
@@ -78,27 +78,29 @@
               <Quiz></Quiz>
             </v-card>
 
-            <v-btn class="right" dark color="#4c4c65" @click="step = 5">Kontynuuj</v-btn>
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 5">Sprawdź swoją wiedzę
+              <v-icon right dark>arrow_right_alt</v-icon>
+            </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="5">
             <v-card class="mb-5" color="#DAE0E0">
-              <Sort></Sort>
+              <Fill></Fill>
             </v-card>
 
-            <v-btn class="right" color="primary" @click="step = 6">Kontynuuj</v-btn>
-
-            <v-btn class="left" flat @click="step = 4">Cofnij</v-btn>
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 6">Uczymy się dalej
+              <v-icon right dark>arrow_right_alt</v-icon>
+            </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="6">
             <v-card class="mb-5" color="#DAE0E0">
-              <Fill></Fill>
+              <Law></Law>
             </v-card>
 
-            <v-btn class="right" color="primary" @click="step = 7">Kontynuuj</v-btn>
-
-            <v-btn class="left" @click="step = 5" flat>Cofnij</v-btn>
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 7">Sprawdź wiedzę
+              <v-icon right dark>arrow_right_alt</v-icon>
+            </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="7">
@@ -106,28 +108,31 @@
               <Connect @content="handleNewContent"></Connect>
             </v-card>
 
-            <v-btn class="right" color="primary" @click="step = 8">Kontynuuj</v-btn>
-
-            <v-btn class="left" flat @click="step = 6">Cofnij</v-btn>
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 8">Sprawdź kolejny test
+              <v-icon right dark>arrow_right_alt</v-icon>
+            </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="8">
-            <v-card class="mb-5" color="#DAE0E0"></v-card>
+            <v-card class="mb-5" color="#DAE0E0">
+              <Sort></Sort>
+            </v-card>
 
-            <v-btn class="right" color="primary" @click="step = 9">Kontynuuj</v-btn>
-
-            <v-btn class="left" flat @click="step = 7">Cofnij</v-btn>
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 9">Przejdź do końca
+              <v-icon right dark>arrow_right_alt</v-icon>
+            </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="9">
-            <v-card class="mb-5" color="#DAE0E0"></v-card>
+            <v-card class="mb-5" color="#DAE0E0">
+            <Finish></Finish>
+            </v-card>
 
-            <v-btn class="left" flat @click="step = 8">Cofnij</v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
     </v-app>
-    <span v-if="step == 8" v-html="content"></span>
+    <span v-if="step == 7" v-html="content"></span>
   </div>
 </template>
 
@@ -139,6 +144,8 @@ import Sort from "@/components/Sort";
 import Fill from "@/components/Fill";
 import Connect from "@/components/Connect";
 import Video from "@/components/Video";
+import Law from "@/components/Law";
+import Finish from "@/components/Finish"
 export default {
   name: "App",
   components: {
@@ -148,7 +155,9 @@ export default {
     Fill,
     Connect,
     Video,
-    Gallery
+    Gallery,
+    Law,
+    Finish
   },
   data() {
     return {
@@ -165,14 +174,17 @@ export default {
 </script>
 
 <style>
+.person img {
+  width: 100%;
+}
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,500,600,700&subset=latin-ext");
 /* APP */
 .application--wrap {
   background: #dae0e0 !important;
   font-family: "Oswald", sans-serif !important;
-  height: 100vh;
+  min-height: 100vh;
 }
-.container * {
+.container:not(.v-input*) * {
   font-family: "Oswald", sans-serif !important;
 }
 /* STEPPER */
@@ -218,11 +230,15 @@ export default {
   height: initial;
   text-transform: none;
   font-size: 16px;
-  margin-top: -7%;
-  margin-right: 7%;
 }
 .v-btn i {
   font-size: 28px;
+}
+
+.next-btn {
+ float: right;
+ margin-right: 10%;
+ margin-bottom: 3%;
 }
 
 /* DIVIDER */

@@ -1,7 +1,7 @@
 <template>
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-flex xs4 offset-xs1>
+        <v-flex xs6 offset-xs1>
           <v-card dark color="rgba(237, 125, 49, 0.7)">
             <v-card-text>
               Zobacz jak brak zabezpieczeń wpływa na ryzyko
@@ -22,7 +22,7 @@
 }
 .v-card {
   z-index: 100;
-  min-height: 50vh;
+  min-height: 50%;
   margin-top: 10px;
 }
 .v-btn {
