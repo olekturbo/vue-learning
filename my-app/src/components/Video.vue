@@ -10,7 +10,7 @@
         <v-flex xs8>
           <v-card class="welcome" color="#DAE0E0">
             <video preload controls>
-              <source src="../assets/video.mp4">
+              <source src="../assets/szkolenie.mp4">
             </video>
           </v-card>
         </v-flex>
@@ -36,6 +36,6 @@
   height: auto;
   position: absolute;
   background: #4c4c65;
-  padding: 30px;
+  padding: 70px;
 }
 </style>

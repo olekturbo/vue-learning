@@ -64,7 +64,7 @@
               <Gallery></Gallery>
             </v-card>
 
-            <video v-if="step === 3" class="myframe" preload autoplay>
+            <video v-if="step === 3" class="myframe" preload autoplay muted>
               <source src="./assets/video.mp4">
             </video>
 
