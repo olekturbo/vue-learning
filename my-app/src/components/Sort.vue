@@ -172,7 +172,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .v-card__text {
   text-align: center;
   cursor: grab;
