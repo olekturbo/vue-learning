@@ -128,8 +128,15 @@
             <Finish></Finish>
             </v-card>
 
+            <v-btn class="next-btn" dark color="#4c4c65" @click="step = 9">Odbierz certyfikat
+              <v-icon right dark>arrow_right_alt</v-icon>
+            </v-btn>
+
           </v-stepper-content>
         </v-stepper-items>
+        <div class="rights">
+        © 2019 INPROX - All Rights Reserved / Wszystkie Prawa Zastrzeżone
+        </div>
       </v-stepper>
     </v-app>
     <span v-if="step == 7" v-html="content"></span>
@@ -217,6 +224,12 @@ export default {
 .v-stepper__step--active .v-stepper__step__step,
 .v-stepper__step--complete .v-stepper__step__step {
   background: #ed7d31 !important;
+}
+
+.rights {
+  color: #4c4c65;
+  font-size: 14px;
+  margin-left: 20px;
 }
 
 /* CARD */
